@@ -133,6 +133,4 @@ stop.bat        # Windows
 ```
 
 
-=======
-# sql-agent
->>>>>>> 6949735016edfaebf3a9ee99068765731df38592
+
