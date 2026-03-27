@@ -1,0 +1,46 @@
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Models cache
+cache/
+models_cache/
+
+# Index
+index/
+
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Next.js
+.next/
+frontend/.next/
+out/
+
+# Build outputs
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Models
+models/
+
+# Database (optional, uncomment if you don't want to commit the database)
+# data/*.db
