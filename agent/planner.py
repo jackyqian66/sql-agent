@@ -2,9 +2,10 @@ import json
 import requests
 
 class Planner:
-    def __init__(self, api_key, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions"):
+    def __init__(self, api_key, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions", model_name="doubao-seed-1-8-251228"):
         self.api_key = api_key
         self.base_url = base_url
+        self.model_name = model_name
 
     async def plan(self, query, context):
         return await self.plan_with_history(query, context, [])
@@ -100,7 +101,7 @@ EXAMPLES:
             }
 
             data = {
-                "model": "doubao-seed-1-8-251228",
+                "model": self.model_name,
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],

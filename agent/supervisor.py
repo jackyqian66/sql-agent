@@ -2,10 +2,11 @@ import json
 import requests
 
 class Supervisor:
-    def __init__(self, tools, api_key=None, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions"):
+    def __init__(self, tools, api_key=None, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions", model_name="doubao-seed-1-8-251228"):
         self.tools = tools
         self.api_key = api_key
         self.base_url = base_url
+        self.model_name = model_name
         
         self.critical_error_keywords = [
             "connection error",
@@ -117,7 +118,7 @@ RESPONSE FORMAT (JSON ONLY, NO OTHER TEXT):
                         }
 
                         data = {
-                            "model": "doubao-seed-1-8-251228",
+                            "model": self.model_name,
                             "messages": [{"role": "user", "content": prompt}],
                             "temperature": 0.3,
                             "max_tokens": 500

@@ -2,9 +2,10 @@ import json
 import requests
 
 class Reporter:
-    def __init__(self, api_key, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions"):
+    def __init__(self, api_key, base_url="https://ark.cn-beijing.volces.com/api/v3/chat/completions", model_name="doubao-seed-1-8-251228"):
         self.api_key = api_key
         self.base_url = base_url
+        self.model_name = model_name
 
     async def generate_response(self, query, results):
         return await self.generate_response_with_history(query, results, [])
@@ -47,7 +48,7 @@ Please provide your answer now:
             }
 
             data = {
-                    "model": "doubao-seed-1-8-251228",
+                    "model": self.model_name,
                 "messages": [
                     {"role": "user", "content": prompt}
                 ],

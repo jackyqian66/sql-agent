@@ -22,13 +22,14 @@ def init_agent():
         return {"success": True, "message": "Agent already initialized"}
     
     load_dotenv()
-    api_key = os.getenv("ARK_API_KEY")
-    base_url = os.getenv("ARK_BASE_URL")
+    api_key = os.getenv("API_KEY") or os.getenv("ARK_API_KEY")
+    base_url = os.getenv("BASE_URL") or os.getenv("ARK_BASE_URL")
+    model_name = os.getenv("MODEL_NAME")
     
     if not api_key:
-        return {"success": False, "error": "ARK_API_KEY environment variable is not set"}
+        return {"success": False, "error": "API_KEY environment variable is not set"}
     
-    agent = SQLAgent(api_key, base_url)
+    agent = SQLAgent(api_key, base_url, model_name)
     return {"success": True, "agent": agent}
 
 @app.route('/api/health', methods=['GET'])
@@ -56,7 +57,11 @@ def initialize():
         
         return jsonify(init_result)
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        import traceback
+        error_detail = traceback.format_exc()
+        print("[ERROR] Initialization failed:")
+        print(error_detail)
+        return jsonify({"success": False, "error": str(e), "detail": error_detail}), 500
 
 @app.route('/api/query', methods=['POST'])
 def query():
@@ -83,7 +88,11 @@ def query():
         
         return jsonify(result)
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+        import traceback
+        error_detail = traceback.format_exc()
+        print("[ERROR] Query failed:")
+        print(error_detail)
+        return jsonify({"success": False, "error": str(e), "detail": error_detail}), 500
 
 if __name__ == '__main__':
     print("Starting SQL Agent Backend...")

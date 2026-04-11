@@ -12,18 +12,18 @@ from agent.reporter import Reporter
 from tools.sql_executor import SQLExecutor
 
 class SQLAgent:
-    def __init__(self, api_key, base_url=None):
+    def __init__(self, api_key, base_url=None, model_name=None):
         self.data_importer = DataImporter()
         self.data_ingestor = DataIngestor()
         self.result_fusion = ResultFusion()
-        self.planner = Planner(api_key, base_url)
-        self.reporter = Reporter(api_key, base_url)
+        self.planner = Planner(api_key, base_url, model_name)
+        self.reporter = Reporter(api_key, base_url, model_name)
         
         self.tools = {
             "sql": SQLExecutor()
         }
         
-        self.supervisor = Supervisor(self.tools, api_key, base_url)
+        self.supervisor = Supervisor(self.tools, api_key, base_url, model_name)
         
         self.index = None
         self.documents = []

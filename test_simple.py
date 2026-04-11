@@ -9,14 +9,15 @@ from dotenv import load_dotenv
 
 async def test_simple():
     load_dotenv()
-    api_key = os.getenv("ARK_API_KEY")
-    base_url = os.getenv("ARK_BASE_URL")
+    api_key = os.getenv("API_KEY") or os.getenv("ARK_API_KEY")
+    base_url = os.getenv("BASE_URL") or os.getenv("ARK_BASE_URL")
+    model_name = os.getenv("MODEL_NAME")
     
     if not api_key:
-        print("错误: ARK_API_KEY 环境变量未设置")
+        print("错误: API_KEY 环境变量未设置")
         return
     
-    agent = SQLAgent(api_key, base_url)
+    agent = SQLAgent(api_key, base_url, model_name)
     
     print("正在初始化 Agent...")
     init_result = await agent.initialize("./data")
