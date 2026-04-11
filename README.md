@@ -206,5 +206,4 @@ stop.bat        # Windows
 如果需要重新下载模型，可以运行：
 ```bash
 python download_model.py
-```
-
+```0
